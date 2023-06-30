@@ -36,35 +36,28 @@ import PintarDatos from './component/PintarDatos'
 const App = () => {
 
 
-    const [namePesonaje, setNamePersonaje] = useState(() => { // creamos una funcion de flecha para leer el local directamente en el estado por que si lo dejamos vacio se recarga y no se guarda en el local.
-        const enMemoria = localStorage.getItem('personajeApi')
-        const initialValue = JSON.parse(enMemoria)
-        return initialValue || ''
-    });
+    // const [namePesonaje, setNamePersonaje] = useState(() => { // creamos una funcion de flecha para leer el local directamente en el estado por que si lo dejamos vacio se recarga y no se guarda en el local.
+    //     const enMemoria = localStorage.getItem('personajeApi')
+    //     const initialValue = JSON.parse(enMemoria)
+    //     return initialValue || ''
+    // });
 
 
 
+    // funciona de esta forma cuando esta la pagina cargada en un servidor como netlify
 
-    // const [namePesonaje, setNamePersonaje] = useState("");
+    const [namePesonaje, setNamePersonaje] = useState("");
 
-    //funciona de esta forma cuando esta la pagina cargada en un servidor como netlify
+    useEffect(() => {
 
-    // useEffect(() => {
+        if (localStorage.getItem("personajeApi")) {
+            setNamePersonaje(JSON.parse(localStorage.getItem("personajeApi")));
+        }
 
-    //     if (localStorage.getItem("personajeApi")) {
-    //         setNamePersonaje(JSON.parse(localStorage.getItem("personajeApi")));
-    //     }
-
-    // }, []);
-
-
-
+    }, []);
 
 
     //hacemos un useEffect para guardar en el local el nombre pasado por el input y que me mantenga la busqueda despues de cargar la pàgina 
-
-
-
     useEffect(() => {
 
         localStorage.setItem("personajeApi", JSON.stringify(namePesonaje))
